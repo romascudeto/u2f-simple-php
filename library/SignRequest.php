@@ -1,0 +1,78 @@
+<?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: samuel
+ * Date: 09/12/2016
+ * Time: 15:14
+ */
+
+
+
+class SignRequest implements \JsonSerializable
+{
+    /** Protocol version */
+    protected $version = U2FServer::VERSION;
+
+    /** Authentication challenge */
+    protected $challenge;
+
+    /** Key handle of a registered authenticator */
+    protected $keyHandle;
+
+    /** Application id */
+    protected $appId;
+
+    public function __construct(array $parameters)
+    {
+        // $this->challenge = $parameters['challenge'];
+        // $this->keyHandle = $parameters['keyHandle'];
+        // $this->appId = $parameters['appId'];
+        $this->challenge = $parameters['challenge'];
+        $this->keyHandle = $parameters['keyHandle'];
+        $this->appId = $parameters['appId'];
+
+    }
+
+    /**
+     * @return string
+     */
+    public function version()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @return string
+     */
+    public function challenge()
+    {
+        return $this->challenge;
+    }
+
+    /**
+     * @return string
+     */
+    public function keyHandle()
+    {
+        return $this->keyHandle;
+    }
+
+    /**
+     * @return string
+     */
+    public function appId()
+    {
+        return $this->appId;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'version' => $this->version,
+            'challenge' => $this->challenge,
+            'keyHandle' => $this->keyHandle,
+            'appId' => $this->appId,
+        ];
+    }
+
+}
